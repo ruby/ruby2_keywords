@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Nobuyoshi Nakada"]
   s.require_paths = ["lib"]
   s.files = [
+    "README.md",
     "lib/ruby2_keywords.rb",
     "ruby2_keywords.gemspec",
   ]

@@ -27,7 +27,8 @@ For class/module instance methods:
 require 'ruby2_keywords'
 
 module YourModule
-  ruby2_keywords def oldstyle_keywords(options = {})
+  ruby2_keywords def delegating_method(*args)
+    other_method(*args)
   end
 end
 ```

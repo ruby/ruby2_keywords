@@ -21,12 +21,23 @@ Or install it yourself as:
 
 ## Usage
 
+For class/module instance methods:
+
 ```ruby
 require 'ruby2_keywords'
 
 module YourModule
   ruby2_keywords def oldstyle_keywords(options = {})
   end
+end
+```
+
+For global methods:
+
+```ruby
+require 'ruby2_keywords'
+
+ruby2_keywords def oldstyle_keywords(options = {})
 end
 ```
 

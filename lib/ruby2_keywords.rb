@@ -6,3 +6,10 @@ class Module
     end
   end
 end
+
+main = TOPLEVEL_BINDING.receiver
+unless main.respond_to?(:ruby2_keywords, true)
+  def main.ruby2_keywords(*)
+    # nil
+  end
+end

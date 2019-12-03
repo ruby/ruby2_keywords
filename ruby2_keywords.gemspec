@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name = "ruby2_keywords"
   s.version = version
   s.summary = "Shim library for Module#ruby2_keywords"
-  s.homepage = "https://www.ruby-rang.org/"
+  s.homepage = "https://github.com/ruby/ruby2_keywords"
   s.licenses = ["Ruby"]
   s.authors = ["Nobuyoshi Nakada"]
   s.require_paths = ["lib"]

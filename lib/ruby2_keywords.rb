@@ -13,3 +13,9 @@ unless main.respond_to?(:ruby2_keywords, true)
     # nil
   end
 end
+
+class Proc
+  def ruby2_keywords
+    self
+  end
+end

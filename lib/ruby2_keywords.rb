@@ -15,7 +15,9 @@ unless main.respond_to?(:ruby2_keywords, true)
 end
 
 class Proc
-  def ruby2_keywords
-    self
+  unless method_defined?(:ruby2_keywords)
+    def ruby2_keywords
+      self
+    end
   end
 end

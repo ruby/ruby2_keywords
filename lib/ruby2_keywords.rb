@@ -21,3 +21,14 @@ class Proc
     end
   end
 end
+
+class Hash
+  unless respond_to?(:ruby2_keywords_hash?)
+    begin
+      $VERBOSE, verbose = nil, $VERBOSE
+      proc {|*a, **h| h}.call(
+    ensure
+      $VERBOSE = verbose
+    end
+  end
+end

@@ -42,6 +42,15 @@ ruby2_keywords def oldstyle_keywords(options = {})
 end
 ```
 
+You can do the same for a method defined by `Module#define_method`:
+
+```ruby
+define_method :delegating_method do |*args, &block|
+  other_method(*args, &block)
+end
+ruby2_keywords :delegating_method
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://bugs.ruby-lang.org.

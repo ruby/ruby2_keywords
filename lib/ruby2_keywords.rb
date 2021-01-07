@@ -1,5 +1,5 @@
 class Module
-  unless respond_to?(:ruby2_keywords, true)
+  unless private_method_defined?(:ruby2_keywords, true)
     private
     def ruby2_keywords(name, *)
       # nil
@@ -23,12 +23,9 @@ class Proc
 end
 
 class Hash
-  unless respond_to?(:ruby2_keywords_hash?)
-    begin
-      $VERBOSE, verbose = nil, $VERBOSE
-      proc {|*a, **h| h}.call(
-    ensure
-      $VERBOSE = verbose
+  unless method_defined?(:ruby2_keywords_hash?)
+    def ruby2_keywords_hash?
+      false
     end
   end
 end

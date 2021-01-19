@@ -1,4 +1,5 @@
 version = IO.popen(%W[git -C #{__dir__} describe --tags --match v[0-9]*], &:read)[/\Av?(\d+(?:\.\d+)*)/, 1]
+abort "Version must not reach 1" if version[/\d+/].to_i >= 1
 
 Gem::Specification.new do |s|
   s.name = "ruby2_keywords"

@@ -22,9 +22,9 @@ class Proc
   end
 end
 
-class Hash
+class << Hash
   unless method_defined?(:ruby2_keywords_hash?)
-    def ruby2_keywords_hash?
+    def ruby2_keywords_hash?(hash)
       false
     end
   end

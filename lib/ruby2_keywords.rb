@@ -28,4 +28,10 @@ class << Hash
       false
     end
   end
+
+  unless method_defined?(:ruby2_keywords_hash)
+    def ruby2_keywords_hash(hash)
+      hash.dup
+    end
+  end
 end

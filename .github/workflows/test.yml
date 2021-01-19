@@ -1,4 +1,4 @@
-name: ubuntu
+name: test
 
 on: [push, pull_request]
 
@@ -11,6 +11,11 @@ jobs:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
     runs-on: ${{ matrix.os }}
     steps:
+    - name: git config
+      run: |
+        git config --global core.autocrlf false
+        git config --global core.eol lf
+        git config --global advice.detachedHead 0
     - uses: actions/checkout@master
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -18,3 +23,17 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
     - name: Run test
       run: rake test
+    - id: build
+      run: |
+        rake build
+        echo "::set-output name=pkg::${GITHUB_REPOSITORY#*/}-${RUNNING_OS%-*}"
+      env:
+        RUNNING_OS: ${{matrix.os}}
+      if: "matrix.ruby == '3.0'"
+      shell: bash
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        path: pkg/*.gem
+        name: ${{steps.build.outputs.pkg}}
+      if: steps.build.outputs.pkg

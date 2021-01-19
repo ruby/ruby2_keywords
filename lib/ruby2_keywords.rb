@@ -1,10 +1,10 @@
 class Module
   unless private_method_defined?(:ruby2_keywords, true)
+    private
     # call-seq:
     #    ruby2_keywords(method_name, ...)
     #
     # Does nothing.
-    private
     def ruby2_keywords(name, *)
       # nil
     end

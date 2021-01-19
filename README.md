@@ -53,8 +53,15 @@ ruby2_keywords :delegating_method
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://bugs.ruby-lang.org.
+Bug reports and pull requests are welcome on [GitHub] or
+[Ruby Issue Tracking System].
 
 ## License
 
-The gem is available as open source under the terms of the [2-Clause BSD License](https://opensource.org/licenses/BSD-2-Clause).
+The gem is available as open source under the terms of the
+[Ruby License] or the [2-Clause BSD License].
+
+[GitHub]: https://github.com/ruby/ruby2_keywords/
+[Ruby Issue Tracking System]: https://bugs.ruby-lang.org
+[Ruby License]: https://www.ruby-lang.org/en/about/license.txt
+[2-Clause BSD License]: https://opensource.org/licenses/BSD-2-Clause

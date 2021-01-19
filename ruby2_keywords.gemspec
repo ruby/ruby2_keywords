@@ -1,4 +1,4 @@
-version = IO.popen(%W[git -C #{__dir__} describe --tags --match v[0-9]*], &:read)[/\Av?(\d+(?:\.\d+)*)/, 1]
+version = "0.0.3"
 abort "Version must not reach 1" if version[/\d+/].to_i >= 1
 
 Gem::Specification.new do |s|

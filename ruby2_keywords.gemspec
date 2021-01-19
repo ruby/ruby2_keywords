@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.licenses = ["Ruby", "BSD-2-Clause"]
   s.authors = ["Nobuyoshi Nakada"]
   s.require_paths = ["lib"]
+  s.rdoc_options = ["--main", "README.md"]
   s.files = [
     "LICENSE",
     "README.md",

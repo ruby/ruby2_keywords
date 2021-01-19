@@ -1,5 +1,5 @@
 class Module
-  unless private_method_defined?(:ruby2_keywords, true)
+  unless private_method_defined?(:ruby2_keywords)
     private
     # call-seq:
     #    ruby2_keywords(method_name, ...)

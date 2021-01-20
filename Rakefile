@@ -10,6 +10,7 @@ end
 task :default => :test
 
 task "build" => "date_epoch"
+task "build" => "changelogs"
 
 task "date_epoch" do
   ENV["SOURCE_DATE_EPOCH"] = IO.popen(%W[git -C #{__dir__} log -1 --format=%ct], &:read).chomp
@@ -56,17 +57,13 @@ task "tag" do
   helper.__send__(:tag_version)
 end
 
-task "ChangeLog", [:ver, :prev] do |ver: nil, prev: nil|
-  logs = Dir.glob("ChangeLog-*", base: __dir__).map {Gem::Version.new(_1[/ChangeLog-\K.*/])}
+def changelog(ver = nil, prev = nil, output:)
   ver &&= Gem::Version.new(ver)
-  unless prev
-    logs.reject! {_1 >= ver} if ver
-    prev = logs.max
-  end
   range = [[prev], [ver, "HEAD"]].map {_1 ? "v#{_1.to_s}" : _2}.compact.join("..")
   IO.popen(%W[git log --format=fuller --topo-order --no-merges #{range}]) do |log|
     line = log.gets
-    File.open(["ChangeLog", (ver if ver)].compact.join("-"), "wb") do |f|
+    FileUtils.mkpath(File.dirname(output))
+    File.open(output, "wb") do |f|
       f.print "-*- coding: utf-8 -*-\n\n", line
       log.each_line do |line|
         line.sub!(/^(?!:)(?:Author|Commit)?(?:Date)?: /, '  \&')
@@ -76,3 +73,18 @@ task "ChangeLog", [:ver, :prev] do |ver: nil, prev: nil|
     end
   end
 end
+
+tags = IO.popen(%w[git tag -l v0.*]).grep(/v(.*)/) {$1}
+tags.sort_by! {_1.scan(/\d+/).map(&:to_i)}
+tags.inject(nil) do |prev, tag|
+  task("logs/ChangeLog-#{tag}") {|t| changelog(tag, prev, output: t.name)}
+  tag
+end
+
+desc "Make ChangeLog"
+task "ChangeLog", [:ver, :prev] do |t, ver: nil, prev: tags.last|
+  changelog(ver, prev, output: t.name)
+end
+changelogs = ["ChangeLog", *tags.map {"logs/ChangeLog-#{_1}"}]
+task "changelogs" => changelogs
+CLOBBER.concat(changelogs) << "logs"

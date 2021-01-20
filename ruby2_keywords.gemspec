@@ -1,4 +1,4 @@
-version = "0.0.4"
+version = "0.0.5"
 abort "Version must not reach 1" if version[/\d+/].to_i >= 1
 
 Gem::Specification.new do |s|

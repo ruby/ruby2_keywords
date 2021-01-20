@@ -35,7 +35,6 @@ def helper.version=(v)
   gemspec.version = v
   update_gemspec
   commit_bump
-  tag_version
 end
 major, minor, teeny = helper.gemspec.version.segments
 
@@ -52,3 +51,7 @@ task "bump:major" do
 end
 
 task "bump" => "bump:teeny"
+
+task "tag" do
+  helper.__send__(:tag_version)
+end

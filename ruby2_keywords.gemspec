@@ -10,9 +10,11 @@ Gem::Specification.new do |s|
   s.authors = ["Nobuyoshi Nakada"]
   s.require_paths = ["lib"]
   s.rdoc_options = ["--main", "README.md"]
-  s.files = [
+  s.extra_rdoc_files = [
     "LICENSE",
     "README.md",
+  ]
+  s.files = [
     "lib/ruby2_keywords.rb",
   ]
 end

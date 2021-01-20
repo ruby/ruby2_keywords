@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md",
+    "ChangeLog",
   ]
   s.files = [
     "lib/ruby2_keywords.rb",

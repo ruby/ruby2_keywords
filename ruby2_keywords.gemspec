@@ -19,4 +19,6 @@ Gem::Specification.new do |s|
   s.files = [
     "lib/ruby2_keywords.rb",
   ]
+  s.add_development_dependency 'test-unit', '>= 2.2'
+  s.add_development_dependency 'rake'
 end

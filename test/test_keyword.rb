@@ -22,7 +22,7 @@ class TestKeywordArguments < Test::Unit::TestCase
   end
 
   def test_toplevel_ruby2_keywords
-    main = TOPLEVEL_BINDING.receiver
+    main = TOPLEVEL_BINDING.eval('self')
     assert_send([main, :respond_to?, :ruby2_keywords, true])
     assert_operator(main.method(:ruby2_keywords).arity, :<, 0)
   end

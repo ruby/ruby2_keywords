@@ -59,7 +59,7 @@ end
 
 def changelog(output, ver = nil, prev = nil)
   ver &&= Gem::Version.new(ver)
-  range = [[prev], [ver, "HEAD"]].map {_1 ? "v#{_1.to_s}" : _2}.compact.join("..")
+  range = [[prev], [ver, "HEAD"]].map {|ver, branch| ver ? "v#{ver.to_s}" : branch}.compact.join("..")
   IO.popen(%W[git log --format=fuller --topo-order --no-merges #{range}]) do |log|
     line = log.gets
     FileUtils.mkpath(File.dirname(output))
@@ -75,7 +75,7 @@ def changelog(output, ver = nil, prev = nil)
 end
 
 tags = IO.popen(%w[git tag -l v0.*]).grep(/v(.*)/) {$1}
-tags.sort_by! {_1.scan(/\d+/).map(&:to_i)}
+tags.sort_by! {|tag| tag.scan(/\d+/).map(&:to_i)}
 tags.inject(nil) do |prev, tag|
   task("logs/ChangeLog-#{tag}") {|t| changelog(t.name, tag, prev)}
   tag
@@ -85,6 +85,6 @@ desc "Make ChangeLog"
 task "ChangeLog", [:ver, :prev] do |t, ver: nil, prev: tags.last|
   changelog(t.name, ver, prev)
 end
-changelogs = ["ChangeLog", *tags.map {"logs/ChangeLog-#{_1}"}]
+changelogs = ["ChangeLog", *tags.map {|tag| "logs/ChangeLog-#{tag}"}]
 task "changelogs" => changelogs
 CLOBBER.concat(changelogs) << "logs"

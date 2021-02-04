@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.md",
     "ChangeLog",
-    *Dir.glob("logs/ChangeLog-*[^~]", base: __dir__),
+    *Dir.glob("#{__dir__}/logs/ChangeLog-*[^~]"),
   ]
   s.files = [
     "lib/ruby2_keywords.rb",

@@ -1,0 +1,57 @@
+version: '3.0'
+
+services:
+  ruby-2.0:
+    image: ruby:2.0
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.1:
+    image: ruby:2.1
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.2:
+    image: ruby:2.2
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.3:
+    image: ruby:2.3
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.4:
+    image: ruby:2.4
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.5:
+    image: ruby:2.5
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.6:
+    image: ruby:2.6
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-2.7:
+    image: ruby:2.7
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'
+  ruby-3.0:
+    image: ruby:3.0
+    volumes:
+      - .:/app
+    command:
+      bash -c 'cd /app && bundle install && bundle exec rake test'

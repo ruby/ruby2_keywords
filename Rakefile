@@ -57,7 +57,7 @@ task "tag" do
   helper.__send__(:tag_version)
 end
 
-def changelog(ver = nil, prev = nil, output:)
+def changelog(output, ver = nil, prev = nil)
   ver &&= Gem::Version.new(ver)
   range = [[prev], [ver, "HEAD"]].map {_1 ? "v#{_1.to_s}" : _2}.compact.join("..")
   IO.popen(%W[git log --format=fuller --topo-order --no-merges #{range}]) do |log|
@@ -77,13 +77,13 @@ end
 tags = IO.popen(%w[git tag -l v0.*]).grep(/v(.*)/) {$1}
 tags.sort_by! {_1.scan(/\d+/).map(&:to_i)}
 tags.inject(nil) do |prev, tag|
-  task("logs/ChangeLog-#{tag}") {|t| changelog(tag, prev, output: t.name)}
+  task("logs/ChangeLog-#{tag}") {|t| changelog(t.name, tag, prev)}
   tag
 end
 
 desc "Make ChangeLog"
 task "ChangeLog", [:ver, :prev] do |t, ver: nil, prev: tags.last|
-  changelog(ver, prev, output: t.name)
+  changelog(t.name, ver, prev)
 end
 changelogs = ["ChangeLog", *tags.map {"logs/ChangeLog-#{_1}"}]
 task "changelogs" => changelogs

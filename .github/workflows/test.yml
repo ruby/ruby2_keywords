@@ -21,8 +21,10 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - name: Install
+      run: bundle install
     - name: Run test
-      run: bundle install && bundle exec rake test
+      run: bundle exec rake test
     - id: build
       run: |
         rake build

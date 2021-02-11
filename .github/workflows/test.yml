@@ -22,9 +22,13 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
     - name: Install
-      run: bundle install
+      id: bundle
+      run: |
+        bundle install
+        echo "::set-output name=exec::bundle exec"
+      if: "matrix.ruby <= '2.1'"
     - name: Run test
-      run: bundle exec rake test
+      run: ${{steps.bundle.outputs.exec}} rake test
     - id: build
       run: |
         rake build

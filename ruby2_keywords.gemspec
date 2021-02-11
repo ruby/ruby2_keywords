@@ -1,9 +1,9 @@
-version = "0.0.5"
-abort "Version must not reach 1" if version[/\d+/].to_i >= 1
+_VERSION = "0.0.5"
+abort "Version must not reach 1" if _VERSION[/\d+/].to_i >= 1
 
 Gem::Specification.new do |s|
   s.name = "ruby2_keywords"
-  s.version = version
+  s.version = _VERSION
   s.summary = "Shim library for Module#ruby2_keywords"
   s.homepage = "https://github.com/ruby/ruby2_keywords"
   s.licenses = ["Ruby", "BSD-2-Clause"]

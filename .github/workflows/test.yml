@@ -27,14 +27,14 @@ jobs:
       id: bundle
       run: |
         bundle install
-        echo "::set-output name=exec::bundle exec"
+        echo "exec=bundle exec" >> $GITHUB_OUTPUT
       if: "matrix.ruby <= '2.1'"
     - name: Run test
       run: ${{steps.bundle.outputs.exec}} rake test
     - id: build
       run: |
         rake build
-        echo "::set-output name=pkg::${GITHUB_REPOSITORY#*/}-${RUNNING_OS%-*}"
+        echo "pkg=${GITHUB_REPOSITORY#*/}-${RUNNING_OS%-*}" >> $GITHUB_OUTPUT
       env:
         RUNNING_OS: ${{matrix.os}}
       if: "matrix.ruby == '3.0'"
